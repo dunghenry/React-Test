@@ -20,13 +20,20 @@ input[type="range"] {
 }
 
 .preview {
+  max-width: 300px;
   width: 200px;
-  height: 200px;
   position: relative;
   top: 50px;
   left: 40%;
+  
 }
-
+.box{
+  display: inline-block;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  margin: 20px;
+}
 .template_1 {
   background-color: #79dff1;
   width: 50px;

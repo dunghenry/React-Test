@@ -1,6 +1,7 @@
 import React from "react";
 import InputColor from "react-input-color";
-import {Resizable} from 're-resizable';
+import { Resizable } from "re-resizable";
+import { ResizableBox } from "react-resizable";
 const BoxPreview = ({
   checked,
   rgba,
@@ -13,8 +14,9 @@ const BoxPreview = ({
 }) => {
   const [color, setColor] = React.useState({});
   const [background, setBackground] = React.useState({});
-  const [height, setHeight] = React.useState(200)
-  const [width, setWidth] = React.useState(200)
+  const [width, setWidth] = React.useState(150);
+  const [height, setHeight] = React.useState(150);
+
   return (
     <div className="box-preview">
       <div className="top" style={{ display: "flex" }}>
@@ -44,21 +46,20 @@ const BoxPreview = ({
         }}
       >
         <Resizable
-          minHeight={100}
+          width={width}
+          height={height}
           minWidth={100}
+          minHeight={100}
           maxWidth={300}
           maxHeight={300}
-          size={{ width: width, height: height }}
-          onResizeStop={(e, direction, ref, d) => {
-            setHeight(d.height);
-            setWidth(d.width)
-          }}
           onResize={(e, direction, ref, d) => {
             setHeight(d.height);
-            setWidth(d.width)
+            setWidth(d.width);
           }}
-          className="preview"
+          className="box"
           style={{
+            width: "200px",
+            height: "200px",
             backgroundColor: `${color.hex}`,
             boxShadow: checked
               ? layer.length === 0
@@ -66,18 +67,26 @@ const BoxPreview = ({
                     opacity / 100
                   }) ${shiftRight}px ${shifDown}px ${blur}px ${spread}px inset 
               `
-                    :
-                    `rgba(${rgba.r},${rgba.g},${rgba.b},${
-                        opacity / 100
-                    }) ${shiftRight}px ${shifDown}px ${blur}px ${spread}px inset,
-                      ${layer.map((item) => item.split(" ").reverse().join(" "))}
+                : `rgba(${rgba.r},${rgba.g},${rgba.b},${
+                    opacity / 100
+                  }) ${shiftRight}px ${shifDown}px ${blur}px ${spread}px inset,
+                      ${layer.map((item) =>
+                        item.split(" ").reverse().join(" ")
+                      )}
                   `
-                    
               : `rgba(${rgba.r},${rgba.g},${rgba.b},${
                   opacity / 100
                 }) ${shiftRight}px ${shifDown}px ${blur}px ${spread}px`,
           }}
-        ></Resizable>
+        >
+          <div
+            className="box"
+            style={{
+              width: width + "px",
+              height: height + "px",
+            }}
+          ></div>
+        </Resizable>
       </div>
       <div className="css-code">
         <h3>CSS code</h3>

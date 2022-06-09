@@ -36,7 +36,8 @@ const BoxLeft = ({layer, handleLayer,checked, setChecked, setRgba, rgba, shiftRi
           </div>
           <br/>
           <div>
-          <InputColor
+              <InputColor
+                    value=""
                     initialValue={"#000000"}
                     onChange={setRgba}
                     placement="right"
