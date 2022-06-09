@@ -14,7 +14,7 @@ function App() {
   const handleLayer = (layer) => {
     setLayer(prev => [...prev, layer])
   }
-  console.log(rgba)
+  
   return (
     <div className="App">
       <BoxLeft
@@ -45,6 +45,8 @@ function App() {
         checked={checked}
         layer={layer}
       />
+
+      
     </div>
   );
 }

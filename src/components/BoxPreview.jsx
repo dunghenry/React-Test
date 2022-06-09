@@ -1,5 +1,6 @@
 import React from "react";
 import InputColor from "react-input-color";
+import {Resizable} from 're-resizable';
 const BoxPreview = ({
   checked,
   rgba,
@@ -12,7 +13,8 @@ const BoxPreview = ({
 }) => {
   const [color, setColor] = React.useState({});
   const [background, setBackground] = React.useState({});
-  console.log(layer);
+  const [height, setHeight] = React.useState(200)
+  const [width, setWidth] = React.useState(200)
   return (
     <div className="box-preview">
       <div className="top" style={{ display: "flex" }}>
@@ -41,11 +43,22 @@ const BoxPreview = ({
           backgroundColor: `${background.hex}`,
         }}
       >
-        <div
+        <Resizable
+          minHeight={100}
+          minWidth={100}
+          maxWidth={300}
+          maxHeight={300}
+          size={{ width: width, height: height }}
+          onResizeStop={(e, direction, ref, d) => {
+            setHeight(d.height);
+            setWidth(d.width)
+          }}
+          onResize={(e, direction, ref, d) => {
+            setHeight(d.height);
+            setWidth(d.width)
+          }}
           className="preview"
           style={{
-            width: "200px",
-            height: "200px",
             backgroundColor: `${color.hex}`,
             boxShadow: checked
               ? layer.length === 0
@@ -64,7 +77,7 @@ const BoxPreview = ({
                   opacity / 100
                 }) ${shiftRight}px ${shifDown}px ${blur}px ${spread}px`,
           }}
-        ></div>
+        ></Resizable>
       </div>
       <div className="css-code">
         <h3>CSS code</h3>
